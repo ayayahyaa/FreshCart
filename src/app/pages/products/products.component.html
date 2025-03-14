@@ -11,8 +11,9 @@
             <img [src]="prod.imageCover" class="w-full h-[260px] object-contain transition-transform duration-500 hover:scale-105" [alt]="prod.title" />
           </div>
           <div class="px-2 py-4 card-body">
-            <h4 class="text-xs text-green-500">{{ prod.category?.name }}</h4>
             <h3 class="font-medium">{{ prod.title.split(' ', 2).join(' ') }}</h3>
+            <h4 class="text-xs text-green-500">{{ prod.category.name }}</h4>
+
             <div class="flex items-center justify-between">
               <span class="font-semibold">{{ prod.price }} EGP</span>
               <div class="flex items-center">
