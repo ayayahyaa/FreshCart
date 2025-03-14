@@ -1,0 +1,7 @@
+.brands-container {
+  padding: 20px;
+}
+
+div[click] {
+  transition: border 0.3s ease-in-out;
+}/*# sourceMappingURL=brands.component.css.map */

@@ -1,0 +1,31 @@
+<section class="container p-6 mx-auto my-10 shadow-xl bg-white/60 backdrop-blur-lg rounded-2xl">
+  <h1 class="mb-6 text-3xl font-extrabold text-center text-green-700">Product Details</h1>
+
+  <div class="grid items-center grid-cols-1 gap-8 md:grid-cols-2">
+    <div class="relative">
+      <img [src]="productDetails.imageCover"
+           class="w-full transition duration-300 transform shadow-lg rounded-xl hover:scale-105"
+           alt="{{productDetails.title}}">
+    </div>
+
+
+    <div class="space-y-6">
+      <h2 class="text-2xl font-bold text-gray-800">{{productDetails.title}}</h2>
+      <p class="leading-relaxed text-gray-600">{{productDetails.description}}</p>
+
+
+      <div class="flex items-center justify-between p-4 bg-gray-100 shadow-sm rounded-xl">
+        <span class="text-2xl font-bold text-green-700">{{productDetails.price}} EGP</span>
+        <div class="flex items-center space-x-2">
+          <i class="text-xl text-yellow-400 fas fa-star"></i>
+          <span class="text-lg font-medium text-gray-700">{{productDetails.ratingsAverage}}</span>
+        </div>
+      </div>
+
+
+      <button class="w-full py-3 font-semibold text-white transition duration-300 transform shadow-lg bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 rounded-xl hover:scale-105">
+        + Add to Cart
+      </button>
+    </div>
+  </div>
+</section>

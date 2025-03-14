@@ -1,0 +1,48 @@
+@if (cartDetails.totalCartPrice) {
+  <section class="main-sec w-[75%] mx-auto">
+    <h1 class="text-3xl text-center text-green-600">Shop Cart</h1>
+
+  <div class="flex items-center justify-between">
+    <span class="text-green-600">Total Cart price : {{cartDetails.totalCartPrice | currency:'GBP'}} </span>
+    <button
+  (click)="clearItems()"
+  class="px-6 py-2 text-sm font-medium text-white transition-all duration-200 bg-red-700 border border-red-800 rounded-lg shadow-md hover:bg-red-800 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-red-500 active:scale-95">
+  Clear Cart
+</button>
+</div>
+
+    @for (prod of cartDetails.products; track prod.product._id) {
+    <div class="grid md:grid-cols-[10%_minmax(0,1fr)] border-b mb-2">
+      <div>
+        <img [src]="prod.product.imageCover" class="w-full h-[100px] object-contain" [alt]="prod.product.title">
+      </div>
+
+      <div class="flex items-center justify-between">
+
+        <div>
+          <h3>{{prod.product.title}}</h3>
+          <h4>Price : {{prod.price | currency: 'GBP'}}</h4>
+          <button (click)="removeItem(prod.product.id)">  <i class="text-green-600 fas fa-trash-can"></i>
+      <span class="ms-2">Remove</span>
+          </button>
+        </div>
+
+        <button (click)="showAlert()">Show Alert</button>
+
+        <div class="flex items-center gap-4">
+          <button (click)="updateCount(prod.product.id , prod.count + 1)" class="text-3xl text-green-600"><i class="fa-regular fa-square-plus"></i></button>
+          <span>{{prod.count}}</span>
+          <button (click)="updateCount(prod.product.id , prod.count - 1)" class="text-3xl text-green-600"><i class="fa-regular fa-square-minus"></i></button>
+        </div>
+
+      </div>
+    </div>
+  }
+  <button class="btn-main" [routerLink]="['/checkout' , cartDetails._id]" >checkout</button>
+
+  </section>
+
+}
+@else {
+  <h1 class="text-3xl text-center text-red-400">Not Data Found🫥</h1>
+}

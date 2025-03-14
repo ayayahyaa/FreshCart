@@ -1,0 +1,100 @@
+<section class="container">
+
+  <div class="grid grid-cols-12 mb-7">
+    <div class="col-span-8">
+      <owl-carousel-o [options]="customMainSlider">
+        <ng-template carouselSlide>
+            <img src="/images/img1.avif" class="w-full h-[300px]"  alt="" />
+        </ng-template>
+        <ng-template carouselSlide>
+            <img src="/images/grocery-banner.png" class="w-full h-[300px]"  alt="" />
+        </ng-template>
+        <ng-template carouselSlide>
+            <img src="/images/grocery-banner-2.jpeg" class="w-full h-[300px]"  alt="" />
+        </ng-template>
+        <ng-template carouselSlide>
+            <img src="/images/img2.avif" class="w-full h-[300px]"  alt="" />
+        </ng-template>
+        <ng-template carouselSlide>
+            <img src="/images/img3.avif" class="w-full h-[300px]"  alt="" />
+        </ng-template>
+        <ng-template carouselSlide>
+            <img src="/images/img4.avif" class="w-full h-[300px]"  alt="" />
+        </ng-template>
+      </owl-carousel-o>
+    </div>
+    <div class="col-span-4">
+      <img src="/images/img1.avif" class="w-full h-[150px] "  alt="" />
+      <img src="/images/img2.avif" class="w-full h-[150px]"  alt="" />
+    </div>
+  </div>
+
+  <div>
+    <owl-carousel-o [options]="customOptions">
+
+        @for (slide of categories(); track $index) {
+          <ng-template carouselSlide >
+            <img class="h-[250px]" [src]="slide.image" [alt]="slide.name" >
+          </ng-template>
+        }
+
+    </owl-carousel-o>
+  </div>
+
+  <h2 class="my-6 text-4xl font-bold text-center">Popular Products</h2>
+
+  <!-- Search Input -->
+  <input
+    [(ngModel)]="search"
+    type="text"
+    placeholder="Search...."
+    class="bg-white border border-gray-300 my-6 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-1/2 mx-auto p-2.5">
+
+  <!-- Products Grid -->
+  <div class="grid gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    @for (prod of products() .slice(0,12) | search : search  ; track prod._id) {
+      <div class="relative overflow-hidden border border-green-400/50 rounded-md shadow-md transition-all duration-500 hover:shadow-xl hover:scale-105 hover:border-green-500 hover:border-[3px] will-change-transform">
+
+        <div [routerLink]="['/details', prod._id]" class="cursor-pointer">
+          <div class="card-img">
+            <img [src]="prod.imageCover" class="w-full h-[260px] object-contain transition-transform duration-500 hover:scale-105" [alt]="prod.title" />
+          </div>
+          <div class="px-2 py-4 card-body">
+            <h4 class="text-xs text-green-500">{{ prod.category.name }}</h4>
+            <h3 class="font-medium">{{ prod.title.split(' ', 2).join(' ') }}</h3>
+            <div class="flex items-center justify-between">
+              <span class="font-semibold">{{ prod.price }} EGP</span>
+              <div class="flex items-center">
+
+
+                <button
+                (click)="toggleWishlist(prod, $event)"
+                class="absolute text-3xl transition-colors duration-300 top-2 left-2"
+              >
+                <i
+                  class="fa-heart"
+                  [class.fas]="isInWishlist(prod)"
+                  [class.far]="!isInWishlist(prod)"
+                  [class.text-red-500]="isInWishlist(prod)"
+                  [class.text-gray-300]="!isInWishlist(prod)"
+                ></i>
+              </button>
+
+
+
+                <i class="text-yellow-300 fas fa-star"></i>
+                <span class="text-gray-500">{{ prod.ratingsAverage }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button
+          (click)="addToCart(prod._id)"
+          class="bg-green-600 text-white py-2 px-10 border rounded w-[90%] mx-auto block mt-2 transition-all duration-300 hover:bg-green-700">
+          Add To Cart
+        </button>
+      </div>
+    }
+  </div>
+</section>
